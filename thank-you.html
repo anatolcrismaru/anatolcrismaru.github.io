@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>eProgram Agency</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0a1a;--panel:rgba(255,255,255,.06);--line:rgba(255,255,255,.14);--text:#eceaff;--muted:#a29fc4;--g1:rgba(124,58,237,.35);--g2:rgba(34,229,201,.18)}
+[data-theme="light"]{--bg:#f5f4ff;--panel:rgba(255,255,255,.8);--line:rgba(40,30,100,.15);--text:#1b1840;--muted:#5d5a85;--g1:rgba(124,58,237,.18)}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;display:grid;place-items:center;padding:24px;font-family:'Sora',system-ui,sans-serif;background:var(--bg);color:var(--text);
+ background-image:radial-gradient(900px 500px at 10% -10%,var(--g1),transparent 60%),radial-gradient(800px 500px at 100% 10%,var(--g2),transparent 60%)}
+main{max-width:520px;width:100%;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:36px 28px;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.tick{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#3b82f6 55%,#22e5c9);display:grid;place-items:center;font-size:30px;color:#07121a;margin:0 auto 16px;box-shadow:0 0 30px rgba(34,229,201,.4)}
+h1{font-size:clamp(22px,4vw,28px);margin-bottom:10px}
+p{color:var(--muted);margin-bottom:20px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:8px 16px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;font-size:14px}
+dt{color:var(--muted)}dd{font-weight:600}
+.note{font-size:12px;margin-bottom:20px}
+.row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+a.btn{display:inline-block;font-weight:600;font-size:14px;text-decoration:none;padding:11px 18px;border-radius:10px;color:#06141a;background:linear-gradient(135deg,#22e5c9,#5eead4);box-shadow:0 0 22px rgba(34,229,201,.4)}
+a.ghost{background:transparent;color:var(--text);border:1px solid var(--line);box-shadow:none}
+a:focus-visible{outline:2px solid #22e5c9;outline-offset:3px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <div class="tick">✓</div>
+  <h1 id="h"></h1>
+  <p id="p"></p>
+  <div id="det" hidden>
+    <dl><dt id="l1"></dt><dd id="v1"></dd><dt id="l2"></dt><dd id="v2"></dd><dt id="l3"></dt><dd id="v3"></dd><dt id="l4"></dt><dd id="v4"></dd></dl>
+    <p class="note" id="note"></p>
+  </div>
+  <div class="row"><a class="btn" id="cal" target="_blank" rel="noopener" hidden></a><a class="btn ghost" href="index.html" id="back"></a></div>
+</main>
+<script>
+const REPLY_HOURS = 2; // change if you cannot answer within 2 hours
+const T = {
+ en:{h:"We received your request!",p:"We will contact you within {h} hours to confirm your consultation.",l:["Service","Expert","Date","Time"],sv:["Web Dev","UI/UX","Content Strategy"],note:"The time is a request until we confirm it.",cal:"Add to Google Calendar",back:"Back to home",loc:"en-GB",ev:"Consultation with eProgram Agency"},
+ ro:{h:"Am primit cererea ta!",p:"Te vom contacta în maxim {h} ore pentru a confirma consultația.",l:["Serviciu","Specialist","Data","Ora"],sv:["Dezvoltare web","UI/UX","Strategie de conținut"],note:"Ora rămâne o solicitare până o confirmăm.",cal:"Adaugă în Google Calendar",back:"Înapoi acasă",loc:"ro-RO",ev:"Consultație cu eProgram Agency"},
+ ru:{h:"Мы получили вашу заявку!",p:"Мы свяжемся с вами в течение {h} часов, чтобы подтвердить консультацию.",l:["Услуга","Специалист","Дата","Время"],sv:["Веб-разработка","UI/UX","Контент-стратегия"],note:"Время остаётся пожеланием, пока мы его не подтвердим.",cal:"Добавить в Google Календарь",back:"На главную",loc:"ru-RU",ev:"Консультация с eProgram Agency"}
+};
+const $ = id => document.getElementById(id);
+let l, th; try{ l = localStorage.getItem("lang"); th = localStorage.getItem("theme"); }catch(e){}
+if(!T[l]){ l = (navigator.language || "en").slice(0,2); if(!T[l]) l = "en"; }
+if(th) document.documentElement.dataset.theme = th;
+const x = T[l]; document.documentElement.lang = l; document.title = x.h + " | eProgram Agency";
+$("h").textContent = x.h; $("p").textContent = x.p.replace("{h}", REPLY_HOURS); $("back").textContent = x.back;
+
+const q = new URLSearchParams(location.search);
+const d = q.get("d"), tm = q.get("tm"), s = +q.get("s"), e = (q.get("e") || "").slice(0,40);
+if(/^\d{4}-\d{2}-\d{2}$/.test(d || "") && /^\d{2}:\d{2}$/.test(tm || "") && x.sv[s]){
+  const start = new Date(`${d}T${tm}:00`);
+  $("det").hidden = false; $("note").textContent = x.note;
+  [x.sv[s], e, start.toLocaleDateString(x.loc, {weekday:"long", day:"numeric", month:"long", year:"numeric"}), tm].forEach((v,i) => { $("l"+(i+1)).textContent = x.l[i]; $("v"+(i+1)).textContent = v; });
+  const f = dt => `${dt.getFullYear()}${String(dt.getMonth()+1).padStart(2,"0")}${String(dt.getDate()).padStart(2,"0")}T${String(dt.getHours()).padStart(2,"0")}${String(dt.getMinutes()).padStart(2,"0")}00`;
+  const end = new Date(start.getTime() + 30*60000);
+  $("cal").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent(x.ev) + "&dates=" + f(start) + "/" + f(end) + "&details=" + encodeURIComponent(x.sv[s] + " – " + e);
+  $("cal").textContent = x.cal; $("cal").hidden = false;
+}
+</script>
+</body>
+</html>
