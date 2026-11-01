@@ -147,12 +147,28 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 .total small{display:block;color:var(--muted);font-size:12px}.total strong{font-size:24px}.total .btn{margin-left:auto}
 .wa{position:fixed;right:18px;bottom:18px;z-index:30;width:54px;height:54px;border-radius:50%;background:#25d366;display:grid;place-items:center;font-size:26px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
 .wa[hidden]{display:none}
-@media(max-width:900px){.links a:not(.btn){display:none}.steps{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}.opts{grid-template-columns:1fr}.total .btn{margin-left:0}}
+.bar-top{background:linear-gradient(90deg,#5b21b6,#1d4ed8);color:#fff;text-align:center;font-size:13px;padding:8px 44px;position:relative}
+.bar-top a{color:#fff;font-weight:700;text-decoration:underline;margin-left:8px}
+.bar-top button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:18px;cursor:pointer;line-height:1;padding:4px 8px}
+.tech{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tc{padding:20px;display:flex;gap:14px;align-items:flex-start;transition:transform .2s,border-color .2s,box-shadow .2s}
+.tc:hover{transform:translateY(-3px);border-color:var(--teal);box-shadow:0 0 24px rgba(34,229,201,.35),inset 0 0 18px rgba(34,229,201,.08)}
+.tg{flex:none;width:44px;height:44px;border-radius:12px;background:var(--grad);display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff;box-shadow:0 0 16px rgba(124,58,237,.5)}
+.tc b{display:block;margin-bottom:2px}.tc p{font-size:13px;color:var(--muted)}
+.founder{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start}
+.fcard{padding:26px;text-align:center}
+.fav{width:96px;height:96px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-size:34px;font-weight:700;color:#fff;margin:0 auto 14px;box-shadow:0 0 28px rgba(124,58,237,.5)}
+.fphoto{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 40%;border-radius:14px;margin-bottom:16px;box-shadow:0 0 28px rgba(124,58,237,.35)}
+.fcard h3{font-size:18px}.fcard small{color:var(--muted);display:block;margin-bottom:14px}.fcard .tags{justify-content:center}
+.fbio{padding:26px}.fbio p{color:var(--muted);margin-bottom:14px;max-width:70ch}.fbio p:last-child{margin-bottom:0}
+.xin{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.xin input{flex:1;min-width:180px}
+@media(max-width:900px){.links a:not(.btn){display:none}.steps{grid-template-columns:1fr 1fr}.founder{grid-template-columns:1fr}.tech{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}.opts,.tech{grid-template-columns:1fr}.total .btn{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.track{animation:none}}
 </style>
 </head>
 <body>
+<div class="bar-top" id="bn"><span id="bn-t"></span><a href="#book" id="bn-c"></a><button id="bn-x" type="button">×</button></div>
 <header><nav>
   <a href="#top" class="logo"><i>e</i><span>eProgram Agency</span></a>
   <div class="links">
@@ -188,13 +204,13 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
     <div class="grid3">
       <article class="glass proj"><div class="vis" style="background:linear-gradient(135deg,#4c1d95,#1e3a8a)">💈</div>
         <div class="info"><b>Fade &amp; Blade</b><small data-i18n="ty1"></small></div>
-        <div class="ov"><div class="tags"><span>HTML</span><span>Tailwind</span><span>JS</span></div><div class="metric" data-i18n="m1"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
+        <div class="ov"><div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div><div class="metric" data-i18n="m1"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
       <article class="glass proj"><div class="vis" style="background:linear-gradient(135deg,#9d174d,#6d28d9)">💅</div>
         <div class="info"><b>Lumina Studio</b><small data-i18n="ty2"></small></div>
         <div class="ov"><div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div><div class="metric" data-i18n="m2"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
       <article class="glass proj"><div class="vis" style="background:linear-gradient(135deg,#0f766e,#1d4ed8)">✨</div>
         <div class="info"><b>Nail Atelier</b><small data-i18n="ty3"></small></div>
-        <div class="ov"><div class="tags"><span>HTML</span><span>Tailwind</span><span>Formspree</span></div><div class="metric" data-i18n="m3"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
+        <div class="ov"><div class="tags"><span>HTML</span><span>JS</span><span>Web3Forms</span></div><div class="metric" data-i18n="m3"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
     </div>
   </div></section>
 
@@ -205,7 +221,18 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
       <div class="glass card"><div class="ico">🛠️</div><h3 data-i18n="w2t"></h3><p data-i18n="w2d"></p></div>
       <div class="glass card"><div class="ico">💬</div><h3 data-i18n="w3t"></h3><p data-i18n="w3d"></p></div>
     </div>
-    <div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
+  </div></section>
+
+  <section id="tech"><div class="wrap">
+    <h2 data-i18n="tc_h"></h2><p class="sub" data-i18n="tc_p"></p>
+    <div class="tech">
+      <div class="glass tc"><span class="tg">H5</span><div><b>HTML5 &amp; CSS3</b><p data-i18n="tc1d"></p></div></div>
+      <div class="glass tc"><span class="tg">JS</span><div><b>JavaScript</b><p data-i18n="tc2d"></p></div></div>
+      <div class="glass tc"><span class="tg">TW</span><div><b>Tailwind CSS</b><p data-i18n="tc3d"></p></div></div>
+      <div class="glass tc"><span class="tg">W3</span><div><b>Web3Forms</b><p data-i18n="tc4d"></p></div></div>
+      <div class="glass tc"><span class="tg">GH</span><div><b>GitHub Pages</b><p data-i18n="tc5d"></p></div></div>
+      <div class="glass tc"><span class="tg">J</span><div><b>Java &amp; SQL</b><p data-i18n="tc6d"></p></div></div>
+    </div>
   </div></section>
 
   <section id="pricing"><div class="wrap">
@@ -232,6 +259,11 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
       <div class="glass step"><h3 data-i18n="p4t"></h3><p data-i18n="p4d"></p></div>
     </div>
   </div></section>
+
+  <section id="founder"><div class="wrap"><div class="founder">
+    <div class="glass fcard"><img class="fphoto" id="f-img" src="anatolImage.jpg" width="720" height="960" alt="" loading="lazy"><h3>Anatolie Crîșmaru</h3><small data-i18n="f_role"></small><div class="tags" id="f-tags"></div></div>
+    <div class="glass fbio"><h2 data-i18n="f_h" style="font-size:26px;margin-bottom:16px"></h2><p data-i18n="f_p1"></p><p data-i18n="f_p2"></p><p data-i18n="f_p3"></p></div>
+  </div></div></section>
 
   <section id="faq"><div class="wrap faq">
     <h2 data-i18n="faq_h" style="margin-bottom:24px"></h2>
@@ -270,6 +302,13 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 
 <a class="wa" id="wa" hidden target="_blank" rel="noopener">💬</a>
 
+<div class="modal" id="exit" role="dialog" aria-modal="true" aria-labelledby="ex-title">
+  <div class="glass"><div class="tick">👋</div><h2 id="ex-title" style="font-size:22px" data-i18n="ex_t"></h2><p id="ex-p" data-i18n="ex_p"></p>
+    <div id="ex-form"><div class="xin"><input id="ex-email" type="email" autocomplete="email" placeholder="you@example.com" aria-label="Email"><button class="btn" id="ex-send" type="button" data-i18n="ex_btn"></button></div>
+    <div class="err" id="ex-err" role="alert"></div><button class="btn ghost" id="ex-no" type="button" data-i18n="ex_no"></button></div>
+  </div>
+</div>
+
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
   <div class="glass"><div class="tick">✓</div><h2 id="m-title" style="font-size:22px" data-i18n="m_title"></h2><p id="m-text"></p><button class="btn" id="m-close" type="button" data-i18n="m_done"></button></div>
 </div>
@@ -288,6 +327,8 @@ const CONFIG = {
   closedWeekdays: [0], // 0 = Sunday. Use [] to open every day.
   // WhatsApp button: your number with country code, digits only (e.g. "373XXXXXXXX"). Leave empty to hide the button.
   whatsapp: "",
+  // Top banner: leave null for the general message. Set a number (e.g. 2) ONLY if it is true: "Only 2 spots left this month".
+  bannerSlots: null,
   // PRICES: these are SAMPLE numbers. Set your real prices before you publish.
   currency: "EUR",
   plans: [{id:1, price:250}, {id:2, price:500, featured:true}, {id:3, price:null}],
@@ -364,7 +405,31 @@ o_lang:["Extra languages","Limbi suplimentare","Дополнительные я�
 o_seo:["SEO and content","SEO și conținut","SEO и контент"],
 o_shop:["Online shop","Magazin online","Интернет-магазин"],
 wa_label:["Chat on WhatsApp","Scrie-ne pe WhatsApp","Написать в WhatsApp"],
-wa_msg:["Hello! I have a question about a website.","Salut! Am o întrebare despre un site.","Здравствуйте! У меня вопрос о сайте."]
+wa_msg:["Hello! I have a question about a website.","Salut! Am o întrebare despre un site.","Здравствуйте! У меня вопрос о сайте."],
+bn_txt:["We're taking on new projects this month.","Preluăm proiecte noi luna aceasta.","В этом месяце мы берём новые проекты."],
+bn_slots:["Only {n} spots left for projects this month.","Doar {n} locuri disponibile pentru proiecte luna aceasta.","В этом месяце осталось мест для проектов: {n}."],
+bn_cta:["Book a free consultation","Programează o consultație gratuită","Запишитесь на бесплатную консультацию"],
+close:["Close","Închide","Закрыть"],
+ex_t:["Wait! Want a quick demo for your business?","Așteaptă! Vrei o demonstrație rapidă pentru afacerea ta?","Подождите! Хотите быстрое демо для вашего бизнеса?"],
+ex_p:["Leave your email and we'll show you what your booking site could look like.","Lasă-ne emailul tău și îți arătăm cum ar putea arăta site-ul tău cu programări.","Оставьте почту, и мы покажем, как мог бы выглядеть ваш сайт с записью."],
+ex_btn:["Send me a demo","Trimite-mi o demonstrație","Пришлите мне демо"],
+ex_no:["No thanks","Nu, mulțumesc","Нет, спасибо"],
+ex_ok:["Thanks! We'll write to you soon.","Mulțumim! Îți scriem în curând.","Спасибо! Скоро напишем вам."],
+tc_h:["Tools we build with","Uneltele cu care construim","Инструменты, с которыми мы работаем"],
+tc_p:["A modern, simple set of tools that keeps your site fast and cheap to run.","Un set modern și simplu de unelte, care îți menține site-ul rapid și ieftin de întreținut.","Современный и простой набор инструментов: сайт быстрый и недорогой в содержании."],
+tc1d:["Clean, fast pages that work on every device.","Pagini curate și rapide, care funcționează pe orice dispozitiv.","Чистые и быстрые страницы для любых устройств."],
+tc2d:["Booking logic, calendars and smooth interactions.","Logica programărilor, calendare și interacțiuni fluide.","Логика записи, календари и плавные взаимодействия."],
+tc3d:["Consistent, modern styling built fast.","Stilizare modernă și consecventă, realizată rapid.","Единый современный стиль, созданный быстро."],
+tc4d:["Booking requests arrive in your email, no server needed.","Cererile de programare ajung pe email, fără server.","Заявки приходят на почту, сервер не нужен."],
+tc5d:["Free, fast and reliable hosting.","Hosting gratuit, rapid și fiabil.","Бесплатный, быстрый и надёжный хостинг."],
+tc6d:["Back-end and databases for bigger projects.","Back-end și baze de date pentru proiecte mari.","Серверная часть и базы данных для крупных проектов."],
+f_h:["Meet the founder","Fondatorul","Основатель"],
+f_role:["Founder & Lead Developer","Fondator & Lead Developer","Основатель и ведущий разработчик"],
+f_certs:["Certiport ITS|Java|Networking|Databases","Certiport ITS|Java|Rețelistică|Baze de date","Certiport ITS|Java|Сети|Базы данных"],
+f_p1:["Hi! I'm Anatolie Crîșmaru, a 4th-year student at the Center of Excellence in Informatics and Information Technologies (CEITI) and a software engineer in the making. I hold international Certiport (ITS) certifications in Java, Networking and Databases.","Salut! Sunt Anatolie Crîșmaru, student în anul 4 la Centrul de Excelență în Informatică și Tehnologii Informaționale (CEITI) și inginer software în devenire. Dețin certificări internaționale Certiport (ITS) în Java, Rețelistică și Baze de Date.","Привет! Я Anatolie Crîșmaru, студент 4 курса Центра передового опыта в информатике и информационных технологиях (CEITI) и будущий инженер-программист. У меня есть международные сертификаты Certiport (ITS) по Java, сетям и базам данных."],
+f_p2:["My passion combines rigorous software architecture with an obsessive attention to detail and to user experience. My background in Java application development, Cisco network administration and the service industry (HORECA) gave me a unique perspective: I know how to build complex technical systems, and how to give end customers a simple, fast and pleasant experience.","Pasiunea mea îmbină arhitectura software riguroasă cu atenția obsesivă pentru detaliu și experiența utilizatorului. Background-ul meu în dezvoltarea aplicațiilor Java, administrarea rețelelor Cisco și activitatea din domeniul serviciilor (HORECA) mi-a oferit o perspectivă unică: știu exact cum să construiesc sisteme tehnice complexe, dar și cum să ofer o experiență simplă, rapidă și plăcută clienților finali.","Моя страсть — сочетание строгой архитектуры программного обеспечения с пристальным вниманием к деталям и удобству пользователя. Опыт разработки Java-приложений, администрирования сетей Cisco и работы в сфере услуг (HORECA) дал мне уникальный взгляд: я знаю, как строить сложные технические системы и как дать конечным клиентам простой, быстрый и приятный опыт."],
+f_p3:["I founded eProgram Agency with a clear mission: to help local businesses (beauty salons, barbershops, clinics and studios) get rid of the chaos of phone calls. We build fast web platforms with built-in online booking, turning visitors into loyal clients, 24/7.","Am fondat eProgram Agency cu o misiune clară: să ajut afacerile locale (saloane de înfrumusețare, frizerii, clinici și studiouri) să elimine haosul apelurilor telefonice. Construim platforme web de mare viteză cu sisteme de programare online integrate, transformând simplii vizitatori în clienți fideli, 24/7.","Я основал eProgram Agency с ясной миссией: помочь местному бизнесу (салонам красоты, барбершопам, клиникам и студиям) избавиться от хаоса телефонных звонков. Мы создаём быстрые веб-платформы со встроенной онлайн-записью, превращая посетителей в постоянных клиентов, 24/7."],
+f_alt:["Anatolie Crîșmaru by the sea at sunset","Anatolie Crîșmaru la mare, la apus","Anatolie Crîșmaru у моря на закате"]
 };
 
 /* ===== APP ===== */
@@ -461,13 +526,50 @@ function drawWa(){
   a.hidden = false; a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t("wa_msg"))}`; a.setAttribute("aria-label", t("wa_label"));
 }
 
+const ss = { get:k=>{try{return sessionStorage.getItem(k)}catch(e){return null}}, set:(k,v)=>{try{sessionStorage.setItem(k,v)}catch(e){}} };
+async function sendLead(data, subject){
+  const endpoint = CONFIG.web3formsKey ? "https://api.web3forms.com/submit" : CONFIG.formEndpoint;
+  if(!endpoint) return false;
+  const payload = CONFIG.web3formsKey ? { access_key:CONFIG.web3formsKey, subject, from_name:"eProgram Agency", ...data } : { subject, ...data };
+  const r = await fetch(endpoint, { method:"POST", headers:{"Content-Type":"application/json","Accept":"application/json"}, body:JSON.stringify(payload) });
+  return r.ok;
+}
+function drawExtras(){
+  $("bn-t").textContent = "⚡ " + (CONFIG.bannerSlots ? t("bn_slots").replace("{n}", CONFIG.bannerSlots) : t("bn_txt"));
+  $("bn-c").textContent = t("bn_cta");
+  $("bn-x").setAttribute("aria-label", t("close"));
+  $("f-img").alt = t("f_alt");
+  $("f-tags").innerHTML = t("f_certs").split("|").map(x => `<span>${x}</span>`).join("");
+}
+$("bn-x").onclick = () => $("bn").hidden = true;
+
+/* Exit-intent popup: desktop only, once per visit, never while the visitor is filling the form */
+const t0 = Date.now();
+function closeExit(){ $("exit").classList.remove("open"); }
+document.addEventListener("mouseout", e => {
+  if(e.relatedTarget || e.clientY > 0 || ss.get("exit") || Date.now() - t0 < 8000) return;
+  if(!matchMedia("(pointer:fine)").matches || document.querySelector(".modal.open") || $("name").value || $("email").value) return;
+  ss.set("exit", "1"); $("exit").classList.add("open"); $("ex-email").focus();
+});
+$("ex-no").onclick = closeExit;
+$("exit").addEventListener("click", e => { if(e.target === $("exit")) closeExit(); });
+$("ex-send").onclick = async () => {
+  const v = $("ex-email").value.trim(), err = $("ex-err"); err.textContent = "";
+  if(!/^\S+@\S+\.\S+$/.test(v)) return err.textContent = t("e_email");
+  $("ex-send").disabled = true;
+  try{
+    if(!await sendLead({ email:v, message:"Visitor asked for a quick demo (exit popup)", language:LANGS[L] }, "Demo request")) throw 0;
+    $("ex-p").textContent = t("ex_ok"); $("ex-form").hidden = true; setTimeout(closeExit, 2500);
+  }catch(e){ $("ex-send").disabled = false; err.textContent = t("e_send"); }
+};
+
 function applyLang(){
   document.documentElement.lang = LANGS[L]; document.title = t("title");
   document.querySelectorAll("[data-i18n]").forEach(e => e.textContent = t(e.dataset.i18n));
   document.querySelectorAll("[data-ph]").forEach(e => e.placeholder = t(e.dataset.ph));
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANGS[L]));
   $("theme").setAttribute("aria-label", t("theme"));
-  drawServices(); drawExperts(); drawCal(); drawTimes(); update(); drawPricing(); drawWa();
+  drawServices(); drawExperts(); drawCal(); drawTimes(); update(); drawPricing(); drawWa(); drawExtras();
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { L = LANGS.indexOf(b.dataset.lang); store.set("lang", b.dataset.lang); applyLang(); });
 
@@ -495,6 +597,11 @@ async function confirmBooking(){
     const body = Object.entries(booking).map(([k,v]) => `${k}: ${v}`).join("\n");
     location.href = `mailto:${CONFIG.ownerEmail}?subject=${encodeURIComponent("New booking: "+booking.service)}&body=${encodeURIComponent(body)}`;
   }
+  if(endpoint){
+    const pad = n => String(n).padStart(2,"0"), d = state.date;
+    const q = new URLSearchParams({ s:state.service, e:CONFIG.experts[state.expert], d:`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`, tm:state.time });
+    location.href = "thank-you.html?" + q; return;
+  }
   b.disabled = false;
   $("m-text").textContent = `${summaryText()}. ${t("m_text")} ${email}.`;
   $("modal").classList.add("open"); $("m-close").focus();
@@ -504,11 +611,9 @@ $("prev").onclick = () => { view = new Date(view.getFullYear(), view.getMonth()-
 $("next").onclick = () => { view = new Date(view.getFullYear(), view.getMonth()+1, 1); drawCal(); };
 $("confirm").onclick = confirmBooking;
 $("m-close").onclick = () => $("modal").classList.remove("open");
-document.addEventListener("keydown", e => { if(e.key === "Escape") $("modal").classList.remove("open"); });
+document.addEventListener("keydown", e => { if(e.key === "Escape"){ $("modal").classList.remove("open"); closeExit(); } });
 $("year").textContent = new Date().getFullYear();
 
-const techs = ["GitHub","Vercel","Tailwind CSS","HTML5","JavaScript","Formspree","Web3Forms","Calendly"];
-$("track").innerHTML = [...techs, ...techs].map(x => `<span>${x}</span>`).join("");
 
 if(CONFIG.calendlyUrl){
   $("calbox").hidden = false;
