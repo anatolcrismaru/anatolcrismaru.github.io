@@ -132,8 +132,23 @@ input:focus,textarea:focus{outline:none;border-color:var(--teal);box-shadow:0 0 
 .tick{width:56px;height:56px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-size:26px;margin:0 auto 14px;color:#07121a}
 .modal p{color:var(--muted);font-size:14px;margin:8px 0 20px}
 footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line);margin-top:30px}
+.plan{display:flex;flex-direction:column;gap:12px;position:relative}
+.plan.feat{border-color:var(--teal);box-shadow:0 0 28px rgba(34,229,201,.2)}
+.badge{position:absolute;top:-11px;right:16px;background:var(--grad);color:#fff;font-size:12px;font-weight:600;padding:3px 10px;border-radius:99px}
+.price{font-size:28px;font-weight:700}.price small{font-size:13px;font-weight:400;color:var(--muted)}
+.plan ul{list-style:none;padding:0;display:grid;gap:8px;flex:1;font-size:14px;color:var(--muted)}
+.plan li::before{content:"✓";color:var(--teal);margin-right:8px}
+.est{margin-top:24px}.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:var(--panel);font-size:14px}
+.opt:has(input:checked){border-color:var(--teal);box-shadow:0 0 14px rgba(34,229,201,.25)}
+.opt small{color:var(--muted);white-space:nowrap}
+.opt input{width:16px;height:16px;padding:0;border:0;background:none;margin-right:10px;accent-color:var(--teal);vertical-align:middle}
+.total{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.total small{display:block;color:var(--muted);font-size:12px}.total strong{font-size:24px}.total .btn{margin-left:auto}
+.wa{position:fixed;right:18px;bottom:18px;z-index:30;width:54px;height:54px;border-radius:50%;background:#25d366;display:grid;place-items:center;font-size:26px;box-shadow:0 6px 20px rgba(0,0,0,.4)}
+.wa[hidden]{display:none}
 @media(max-width:900px){.links a:not(.btn){display:none}.steps{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}}
+@media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}.opts{grid-template-columns:1fr}.total .btn{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.track{animation:none}}
 </style>
 </head>
@@ -141,7 +156,7 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 <header><nav>
   <a href="#top" class="logo"><i>e</i><span>eProgram Agency</span></a>
   <div class="links">
-    <a href="#top" data-i18n="nav_home"></a><a href="#services" data-i18n="nav_services"></a><a href="#portfolio" data-i18n="nav_work"></a>
+    <a href="#top" data-i18n="nav_home"></a><a href="#services" data-i18n="nav_services"></a><a href="#portfolio" data-i18n="nav_work"></a><a href="#pricing" data-i18n="nav_pricing"></a>
     <a href="#about" data-i18n="nav_about"></a><a href="#faq" data-i18n="nav_faq"></a>
     <a href="#book" class="btn" data-i18n="nav_book"></a>
   </div>
@@ -193,6 +208,21 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
     <div class="ticker" aria-hidden="true"><div class="track" id="track"></div></div>
   </div></section>
 
+  <section id="pricing"><div class="wrap">
+    <h2 data-i18n="pr_h"></h2><p class="sub" data-i18n="pr_p"></p>
+    <div class="grid3" id="plans"></div>
+    <div class="glass box est">
+      <h3 data-i18n="es_h"></h3>
+      <div class="opts" id="opts"></div>
+      <div class="total">
+        <div><small data-i18n="es_total"></small><strong id="es-price">—</strong></div>
+        <div><small data-i18n="es_time"></small><strong id="es-days">—</strong></div>
+        <button class="btn" id="es-cta" type="button" data-i18n="es_cta"></button>
+      </div>
+      <p class="summary" style="margin-top:12px" data-i18n="es_note"></p>
+    </div>
+  </div></section>
+
   <section id="about"><div class="wrap">
     <h2 data-i18n="ab_h"></h2><p class="sub" data-i18n="ab_p"></p>
     <div class="steps">
@@ -238,6 +268,8 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 
 <footer><div class="wrap">© <span id="year"></span> eProgram Agency · eprogramagency.me</div></footer>
 
+<a class="wa" id="wa" hidden target="_blank" rel="noopener">💬</a>
+
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">
   <div class="glass"><div class="tick">✓</div><h2 id="m-title" style="font-size:22px" data-i18n="m_title"></h2><p id="m-text"></p><button class="btn" id="m-close" type="button" data-i18n="m_done"></button></div>
 </div>
@@ -253,7 +285,16 @@ const CONFIG = {
   calendlyUrl: "",    // e.g. "https://calendly.com/your-name/30min"
   experts: ["Sarah J.", "Anatolie C."],
   times: ["09:00", "11:30", "14:00", "16:30"],
-  closedWeekdays: [0] // 0 = Sunday. Use [] to open every day.
+  closedWeekdays: [0], // 0 = Sunday. Use [] to open every day.
+  // WhatsApp button: your number with country code, digits only (e.g. "373XXXXXXXX"). Leave empty to hide the button.
+  whatsapp: "",
+  // PRICES: these are SAMPLE numbers. Set your real prices before you publish.
+  currency: "EUR",
+  plans: [{id:1, price:250}, {id:2, price:500, featured:true}, {id:3, price:null}],
+  options: [
+    {id:"landing", price:200, days:5}, {id:"booking", price:150, days:3}, {id:"multi", price:300, days:8},
+    {id:"ui", price:150, days:4}, {id:"lang", price:80, days:2}, {id:"seo", price:120, days:3}, {id:"shop", price:450, days:12}
+  ]
 };
 const SERVICES_EN = ["Web Dev", "UI/UX", "Content Strategy"];
 
@@ -296,7 +337,34 @@ e_svc:["Select a service.","Alege un serviciu.","Выберите услугу."
 e_name:["Enter your name.","Introdu numele.","Введите имя."],e_email:["Enter a valid email address.","Introdu o adresă de email validă.","Введите корректный адрес эл. почты."],e_phone:["Enter a valid phone number.","Introdu un număr de telefon valid.","Введите корректный номер телефона."],
 e_send:["The booking could not be sent. Check your connection and try again.","Programarea nu a putut fi trimisă. Verifică conexiunea și încearcă din nou.","Не удалось отправить запись. Проверьте соединение и попробуйте снова."],
 m_title:["Booking confirmed","Programare confirmată","Запись подтверждена"],m_text:["We will confirm by email at","Vom confirma prin email la","Мы подтвердим по эл. почте:"],m_done:["Done","Gata","Готово"],
-cal_h:["Or book directly in our calendar","Sau programează direct în calendarul nostru","Или запишитесь прямо в нашем календаре"]
+cal_h:["Or book directly in our calendar","Sau programează direct în calendarul nostru","Или запишитесь прямо в нашем календаре"],
+nav_pricing:["Pricing","Prețuri","Цены"],
+pr_h:["Packages and prices","Pachete și prețuri","Пакеты и цены"],
+pr_p:["Pick a package, or build an estimate for your own list. Final prices are confirmed after a free consultation.","Alege un pachet sau calculează o estimare pentru lista ta. Prețul final se confirmă după o consultație gratuită.","Выберите пакет или рассчитайте оценку для своего списка. Окончательная цена подтверждается после бесплатной консультации."],
+pr_from:["from","de la","от"],
+pr_custom:["Custom quote","Ofertă personalizată","Индивидуальная оценка"],
+pr_rec:["Recommended","Recomandat","Рекомендуем"],
+pr_select:["Select plan","Alege pachetul","Выбрать пакет"],
+pl1n:["Basic Launch","Lansare de bază","Базовый старт"],
+pl2n:["Pro Business","Business Pro","Бизнес Pro"],
+pl3n:["Custom","Personalizat","Индивидуальный"],
+pl1f:["One-page website|Online booking form|Mobile-friendly design|Hosting and domain setup help","Site de o pagină|Formular de programare online|Design adaptat pentru mobil|Ajutor cu hosting și domeniu","Одностраничный сайт|Форма онлайн-записи|Адаптивный дизайн|Помощь с хостингом и доменом"],
+pl2f:["Up to 5 pages|Booking with email alerts|Up to 3 languages|Basic SEO setup","Până la 5 pagini|Programare cu notificări pe email|Până la 3 limbi|Optimizare SEO de bază","До 5 страниц|Запись с уведомлениями на почту|До 3 языков|Базовая SEO-настройка"],
+pl3f:["Larger or special projects|Online shop or custom features|Plan and price after a consultation","Proiecte mari sau speciale|Magazin online sau funcții personalizate|Plan și preț după consultație","Крупные или особые проекты|Интернет-магазин или особые функции|План и цена после консультации"],
+es_h:["Estimate your project","Estimează proiectul tău","Оцените свой проект"],
+es_total:["Estimated price","Preț estimat","Примерная цена"],
+es_time:["Delivery, working days","Livrare, zile lucrătoare","Срок, рабочих дней"],
+es_cta:["Book a consultation with this estimate","Programează o consultație cu această estimare","Записаться с этой оценкой"],
+es_note:["This is an estimate, not a fixed offer.","Aceasta este o estimare, nu o ofertă fixă.","Это оценка, а не окончательное предложение."],
+o_landing:["Landing page","Pagină de prezentare","Лендинг"],
+o_booking:["Online booking","Programare online","Онлайн-запись"],
+o_multi:["Multi-page site (up to 5)","Site cu mai multe pagini (până la 5)","Многостраничный сайт (до 5)"],
+o_ui:["UI/UX design","Design UI/UX","UI/UX-дизайн"],
+o_lang:["Extra languages","Limbi suplimentare","Дополнительные языки"],
+o_seo:["SEO and content","SEO și conținut","SEO и контент"],
+o_shop:["Online shop","Magazin online","Интернет-магазин"],
+wa_label:["Chat on WhatsApp","Scrie-ne pe WhatsApp","Написать в WhatsApp"],
+wa_msg:["Hello! I have a question about a website.","Salut! Am o întrebare despre un site.","Здравствуйте! У меня вопрос о сайте."]
 };
 
 /* ===== APP ===== */
@@ -358,13 +426,48 @@ function summaryText(){
 }
 function update(){ $("summary").textContent = summaryText() || t("sum_empty"); $("err").textContent = ""; }
 
+const picked = new Set();
+const money = n => new Intl.NumberFormat(loc(), {style:"currency", currency:CONFIG.currency, maximumFractionDigits:0}).format(n);
+function prefill(text){ $("note").value = text; $("book").scrollIntoView(); $("name").focus({preventScroll:true}); }
+function drawTotal(){
+  const sel = CONFIG.options.filter(o => picked.has(o.id));
+  const price = sel.reduce((a,o) => a+o.price, 0), days = sel.reduce((a,o) => a+o.days, 0);
+  $("es-price").textContent = sel.length ? money(price) : "—";
+  $("es-days").textContent = sel.length ? "≈ "+days : "—";
+  $("es-cta").disabled = !sel.length;
+  $("es-cta").onclick = () => prefill(`Estimate: ${sel.map(o => I18N["o_"+o.id][0]).join(", ")}. About ${price} ${CONFIG.currency}, ~${days} working days.`);
+}
+function drawPricing(){
+  const pl = $("plans"); pl.innerHTML = "";
+  CONFIG.plans.forEach(p => {
+    const c = document.createElement("div"); c.className = "glass card plan" + (p.featured ? " feat" : "");
+    c.innerHTML = `${p.featured ? `<span class="badge">${t("pr_rec")}</span>` : ""}<h3>${t("pl"+p.id+"n")}</h3>
+      <div class="price">${p.price ? `<small>${t("pr_from")}</small> ${money(p.price)}` : t("pr_custom")}</div>
+      <ul>${t("pl"+p.id+"f").split("|").map(f => `<li>${f}</li>`).join("")}</ul>`;
+    c.appendChild(btn("btn" + (p.featured ? "" : " ghost"), t("pr_select"), null, () => prefill("Plan: " + I18N["pl"+p.id+"n"][0] + (p.price ? ` (from ${p.price} ${CONFIG.currency})` : ""))));
+    pl.appendChild(c);
+  });
+  const op = $("opts"); op.innerHTML = "";
+  CONFIG.options.forEach(o => {
+    const l = document.createElement("label"); l.className = "opt";
+    l.innerHTML = `<span><input type="checkbox" ${picked.has(o.id) ? "checked" : ""}>${t("o_"+o.id)}</span><small>+${money(o.price)}</small>`;
+    l.querySelector("input").onchange = e => { e.target.checked ? picked.add(o.id) : picked.delete(o.id); drawTotal(); };
+    op.appendChild(l);
+  });
+  drawTotal();
+}
+function drawWa(){
+  const a = $("wa"); if(!CONFIG.whatsapp) return;
+  a.hidden = false; a.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(t("wa_msg"))}`; a.setAttribute("aria-label", t("wa_label"));
+}
+
 function applyLang(){
   document.documentElement.lang = LANGS[L]; document.title = t("title");
   document.querySelectorAll("[data-i18n]").forEach(e => e.textContent = t(e.dataset.i18n));
   document.querySelectorAll("[data-ph]").forEach(e => e.placeholder = t(e.dataset.ph));
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANGS[L]));
   $("theme").setAttribute("aria-label", t("theme"));
-  drawServices(); drawExperts(); drawCal(); drawTimes(); update();
+  drawServices(); drawExperts(); drawCal(); drawTimes(); update(); drawPricing(); drawWa();
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { L = LANGS.indexOf(b.dataset.lang); store.set("lang", b.dataset.lang); applyLang(); });
 
