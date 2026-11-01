@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>404 | eProgram Agency</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0a1a;--text:#eceaff;--muted:#a29fc4;--g1:rgba(124,58,237,.35);--g2:rgba(34,229,201,.18)}
+[data-theme="light"]{--bg:#f5f4ff;--text:#1b1840;--muted:#5d5a85;--g1:rgba(124,58,237,.18)}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px;font-family:'Sora',system-ui,sans-serif;background:var(--bg);color:var(--text);
+ background-image:radial-gradient(900px 500px at 10% -10%,var(--g1),transparent 60%),radial-gradient(800px 500px at 100% 10%,var(--g2),transparent 60%)}
+.code{font-size:clamp(90px,22vw,170px);font-weight:700;line-height:1;background:linear-gradient(135deg,#7c3aed,#3b82f6 55%,#22e5c9);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1{font-size:clamp(22px,4vw,30px);margin:8px 0 10px}
+p{color:var(--muted);max-width:420px;margin:0 auto 26px}
+a{display:inline-block;font-weight:600;font-size:14px;color:#06141a;text-decoration:none;padding:11px 20px;border-radius:10px;background:linear-gradient(135deg,#22e5c9,#5eead4);box-shadow:0 0 22px rgba(34,229,201,.4)}
+a:focus-visible{outline:2px solid #22e5c9;outline-offset:3px}
+</style>
+</head>
+<body>
+<main>
+  <div class="code">404</div>
+  <h1 id="h"></h1>
+  <p id="p"></p>
+  <a href="/" id="a"></a>
+</main>
+<script>
+const T={en:["Page not found","This page doesn't exist or has moved. Go back to the home page to continue.","Back to home"],
+ro:["Pagina nu a fost găsită","Această pagină nu există sau a fost mutată. Revino la pagina principală pentru a continua.","Înapoi acasă"],
+ru:["Страница не найдена","Такой страницы нет или она перемещена. Вернитесь на главную, чтобы продолжить.","На главную"]};
+let l, th; try{ l=localStorage.getItem("lang"); th=localStorage.getItem("theme"); }catch(e){}
+if(!T[l]){ l=(navigator.language||"en").slice(0,2); if(!T[l]) l="en"; }
+if(th) document.documentElement.dataset.theme=th;
+document.documentElement.lang=l;
+[h,p,a].forEach((el,i)=>el.textContent=T[l][i]);
+document.title="404 | eProgram Agency";
+</script>
+</body>
+</html>
