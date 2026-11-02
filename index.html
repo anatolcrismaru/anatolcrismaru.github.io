@@ -66,7 +66,8 @@ h2{font-size:clamp(24px,4vw,34px);margin-bottom:10px;letter-spacing:-.01em}
 .ico{font-size:26px;margin-bottom:10px}
 /* portfolio */
 .proj{position:relative;overflow:hidden;min-height:230px;display:flex;flex-direction:column}
-.vis{height:140px;display:grid;place-items:center;font-size:48px}
+.vis{position:relative;overflow:hidden;aspect-ratio:11/5;background:#0d0b22}.vis img{display:block;width:100%;height:100%;object-fit:cover}
+.vis::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,6,24,.6))}
 .info{padding:14px 18px}.info b{display:block}.info small{color:var(--muted)}
 .ov{position:absolute;inset:0;background:var(--ovl);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:12px;padding:20px;opacity:0;transition:opacity .2s}
 .proj:hover .ov,.proj:focus-within .ov{opacity:1}
@@ -138,6 +139,8 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 .price{font-size:28px;font-weight:700}.price small{font-size:13px;font-weight:400;color:var(--muted)}
 .plan ul{list-style:none;padding:0;display:grid;gap:8px;flex:1;font-size:14px;color:var(--muted)}
 .plan li::before{content:"✓";color:var(--teal);margin-right:8px}
+.plans{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.plan .for{font-size:13px;color:var(--muted)}.plan .eta{font-size:13px;font-weight:600}
 .est{margin-top:24px}.opts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .opt{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;cursor:pointer;background:var(--panel);font-size:14px}
 .opt:has(input:checked){border-color:var(--teal);box-shadow:0 0 14px rgba(34,229,201,.25)}
@@ -162,8 +165,8 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 .fcard h3{font-size:18px}.fcard small{color:var(--muted);display:block;margin-bottom:14px}.fcard .tags{justify-content:center}
 .fbio{padding:26px}.fbio p{color:var(--muted);margin-bottom:14px;max-width:70ch}.fbio p:last-child{margin-bottom:0}
 .xin{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.xin input{flex:1;min-width:180px}
-@media(max-width:900px){.links a:not(.btn){display:none}.steps{grid-template-columns:1fr 1fr}.founder{grid-template-columns:1fr}.tech{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}.opts,.tech{grid-template-columns:1fr}.total .btn{margin-left:0}}
+@media(max-width:900px){.links a:not(.btn){display:none}.steps{grid-template-columns:1fr 1fr}.founder{grid-template-columns:1fr}.tech,.plans{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}.opts,.tech,.plans{grid-template-columns:1fr}.total .btn{margin-left:0}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.track{animation:none}}
 </style>
 </head>
@@ -202,13 +205,13 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
   <section id="portfolio"><div class="wrap">
     <h2 data-i18n="pf_h"></h2><p class="sub" data-i18n="pf_p"></p>
     <div class="grid3">
-      <article class="glass proj"><div class="vis" style="background:linear-gradient(135deg,#4c1d95,#1e3a8a)">💈</div>
+      <article class="glass proj"><div class="vis"><img id="p1-img" src="demo-barbershop.jpg" width="900" height="409" alt="" loading="lazy"></div>
         <div class="info"><b>Fade &amp; Blade</b><small data-i18n="ty1"></small></div>
         <div class="ov"><div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div><div class="metric" data-i18n="m1"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
-      <article class="glass proj"><div class="vis" style="background:linear-gradient(135deg,#9d174d,#6d28d9)">💅</div>
+      <article class="glass proj"><div class="vis"><img id="p2-img" src="demo-beauty.jpg" width="900" height="409" alt="" loading="lazy"></div>
         <div class="info"><b>Lumina Studio</b><small data-i18n="ty2"></small></div>
         <div class="ov"><div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div><div class="metric" data-i18n="m2"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
-      <article class="glass proj"><div class="vis" style="background:linear-gradient(135deg,#0f766e,#1d4ed8)">✨</div>
+      <article class="glass proj"><div class="vis"><img id="p3-img" src="demo-nails.jpg" width="900" height="409" alt="" loading="lazy"></div>
         <div class="info"><b>Nail Atelier</b><small data-i18n="ty3"></small></div>
         <div class="ov"><div class="tags"><span>HTML</span><span>JS</span><span>Web3Forms</span></div><div class="metric" data-i18n="m3"></div><a class="btn" href="#book" data-i18n="pf_demo"></a></div></article>
     </div>
@@ -237,7 +240,7 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 
   <section id="pricing"><div class="wrap">
     <h2 data-i18n="pr_h"></h2><p class="sub" data-i18n="pr_p"></p>
-    <div class="grid3" id="plans"></div>
+    <div class="plans" id="plans"></div>
     <div class="glass box est">
       <h3 data-i18n="es_h"></h3>
       <div class="opts" id="opts"></div>
@@ -267,10 +270,8 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 
   <section id="faq"><div class="wrap faq">
     <h2 data-i18n="faq_h" style="margin-bottom:24px"></h2>
-    <details class="glass"><summary data-i18n="q1"></summary><p data-i18n="a1"></p></details>
-    <details class="glass"><summary data-i18n="q2"></summary><p data-i18n="a2"></p></details>
-    <details class="glass"><summary data-i18n="q3"></summary><p data-i18n="a3"></p></details>
-  </div></section>
+    <div id="faq-list"></div>
+    </div></section>
 
   <section id="book"><div class="wrap">
     <h2 data-i18n="bk_h"></h2><p class="sub" data-i18n="bk_p"></p>
@@ -329,12 +330,12 @@ const CONFIG = {
   whatsapp: "",
   // Top banner: leave null for the general message. Set a number (e.g. 2) ONLY if it is true: "Only 2 spots left this month".
   bannerSlots: null,
-  // PRICES: these are SAMPLE numbers. Set your real prices before you publish.
+  // PRICES: package prices come from your list. The estimator prices below are aligned to them (landing + booking = Starter). Adjust if needed.
   currency: "EUR",
-  plans: [{id:1, price:250}, {id:2, price:500, featured:true}, {id:3, price:null}],
+  plans: [{id:1, price:250}, {id:2, price:500, featured:true}, {id:3, price:850}, {id:4, price:50, monthly:true}],
   options: [
-    {id:"landing", price:200, days:5}, {id:"booking", price:150, days:3}, {id:"multi", price:300, days:8},
-    {id:"ui", price:150, days:4}, {id:"lang", price:80, days:2}, {id:"seo", price:120, days:3}, {id:"shop", price:450, days:12}
+    {id:"landing", price:120, days:2}, {id:"booking", price:130, days:2}, {id:"multi", price:120, days:4},
+    {id:"ui", price:100, days:3}, {id:"lang", price:80, days:2}, {id:"seo", price:100, days:2}, {id:"shop", price:400, days:10}
   ]
 };
 const SERVICES_EN = ["Web Dev", "UI/UX", "Content Strategy"];
@@ -350,7 +351,7 @@ hero_c1:["Book a free consultation","Programează o consultație gratuită","Б�
 svc_h:["What you get","Ce primești","Что вы получаете"],
 c1t:["Online booking","Programare online","Онлайн-запись"],c1d:["Clients pick a service, a specialist and a time, 24/7, without calling.","Clienții aleg serviciul, specialistul și ora, non-stop, fără să sune.","Клиенты выбирают услугу, мастера и время в любое время суток, без звонков."],
 c2t:["Made for your trade","Creat pentru domeniul tău","Под вашу сферу"],c2d:["Barbershops, beauty salons, nail studios, spas and clinics.","Frizerii, saloane de înfrumusețare, studiouri de unghii, spa și clinici.","Барбершопы, салоны красоты, ногтевые студии, спа и клиники."],
-c3t:["Fast launch","Lansare rapidă","Быстрый запуск"],c3d:["We aim to launch most sites in about two weeks, with hosting and domain set up.","Ne propunem să lansăm majoritatea site-urilor în aproximativ două săptămâni, cu hosting și domeniu configurate.","Мы стремимся запускать большинство сайтов примерно за две недели, с настроенными хостингом и доменом."],
+c3t:["Fast launch","Lansare rapidă","Быстрый запуск"],c3d:["Starter sites go live in about 3–5 days, bigger projects in 1–2 weeks, with hosting and domain set up.","Site-urile Starter sunt gata în 3–5 zile, proiectele mai mari în 1–2 săptămâni, cu hosting și domeniu configurate.","Сайты Starter запускаются за 3–5 дней, более крупные проекты — за 1–2 недели, хостинг и домен настроены."],
 pf_h:["Demo projects","Proiecte demo","Демо-проекты"],pf_p:["We have no client projects yet. These concepts show what your booking site could look like.","Încă nu avem proiecte pentru clienți. Aceste concepte arată cum ar putea arăta site-ul tău cu programări.","Клиентских проектов у нас пока нет. Эти концепты показывают, как мог бы выглядеть ваш сайт с записью."],
 ty1:["Barbershop concept","Concept frizerie","Концепт барбершопа"],ty2:["Beauty salon concept","Concept salon de înfrumusețare","Концепт салона красоты"],ty3:["Nail studio concept","Concept studio de unghii","Концепт студии маникюра"],
 m1:["Booking in 4 steps","Programare în 4 pași","Запись в 4 шага"],m2:["Mobile-first design","Design pentru mobil","Дизайн для телефонов"],m3:["Email alert for every booking","Notificare email la fiecare programare","Письмо на почту о каждой записи"],
@@ -362,9 +363,9 @@ p2t:["Design","Design","Дизайн"],p2d:["You approve a look that matches you
 p3t:["Development","Dezvoltare","Разработка"],p3d:["We build the site and connect the booking form.","Construim site-ul și conectăm formularul de programare.","Создаём сайт и подключаем форму записи."],
 p4t:["Launch","Lansare","Запуск"],p4d:["Your site goes live on your own domain.","Site-ul tău devine live pe propriul domeniu.","Сайт выходит в сеть на вашем домене."],
 faq_h:["Questions","Întrebări frecvente","Частые вопросы"],
-q1:["How long does a website take?","Cât durează crearea unui site?","Сколько занимает создание сайта?"],a1:["We aim for about two weeks, depending on the number of pages and services.","Ne propunem aproximativ două săptămâni, în funcție de numărul de pagini și servicii.","Мы стремимся уложиться примерно в две недели, в зависимости от числа страниц и услуг."],
-q2:["Do you provide ongoing support?","Oferiți suport continuu?","Вы поддерживаете сайт после запуска?"],a2:["Yes. We fix issues and update prices, services and hours after launch.","Da. Remediem problemele și actualizăm prețurile, serviciile și programul după lansare.","Да. Исправляем ошибки и обновляем цены, услуги и часы работы после запуска."],
-q3:["What do you need to start?","De ce ai nevoie pentru a începe?","Что нужно для начала?"],a3:["Your service list with prices, team names, opening hours and your logo.","Lista serviciilor cu prețuri, numele echipei, programul de lucru și logo-ul.","Список услуг с ценами, имена сотрудников, часы работы и логотип."],
+q1:["How long does it take to build and launch the site?","Cât durează crearea și lansarea site-ului?","Сколько занимает создание и запуск сайта?"],a1:["A Starter site takes 3–5 days, and a Pro Business package takes about 7–10 working days from receiving your materials.","Un site Starter durează 3–5 zile, iar un pachet Pro Business durează aproximativ 7–10 zile lucrătoare de la primirea materialelor.","Сайт Starter занимает 3–5 дней, а пакет Pro Business — примерно 7–10 рабочих дней с момента получения материалов."],
+q2:["How does the online booking system work?","Cum funcționează sistemul de programare online?","Как работает система онлайн-записи?"],a2:["Your client chooses a service, a specialist, a date and a time. When they confirm, you get an instant email notification with all their details.","Clientul își alege serviciul, specialistul, data și ora. În momentul confirmării, tu primești o notificare instant pe e-mail cu toate datele sale.","Клиент выбирает услугу, специалиста, дату и время. После подтверждения вы мгновенно получаете уведомление на почту со всеми его данными."],
+q3:["Do I have to pay a mandatory monthly subscription?","Trebuie să plătesc vreun abonament lunar obligatoriu?","Нужно ли платить обязательную ежемесячную подписку?"],a3:["No. Once launched, the site belongs entirely to you. The maintenance plan is 100% optional.","Nu. Odată lansat, site-ul îți aparține în totalitate. Abonamentul de mentenanță este 100% opțional.","Нет. После запуска сайт полностью принадлежит вам. Подписка на обслуживание полностью необязательна."],
 bk_h:["Book a consultation","Programează o consultație","Запишитесь на консультацию"],bk_p:["Tell us about your business. We will show you what your booking site could look like.","Spune-ne despre afacerea ta. Îți arătăm cum ar putea arăta site-ul tău cu programări.","Расскажите о вашем бизнесе. Мы покажем, как мог бы выглядеть ваш сайт с записью."],
 st1:["1. Select service","1. Alege serviciul","1. Выберите услугу"],st2:["2. Choose expert","2. Alege specialistul","2. Выберите специалиста"],st3:["3. Select time","3. Alege ora","3. Выберите время"],st4:["4. Finalize details","4. Finalizează datele","4. Укажите данные"],
 sv1:["Web Dev","Dezvoltare web","Веб-разработка"],sv2:["UI/UX","UI/UX","UI/UX"],sv3:["Content Strategy","Strategie de conținut","Контент-стратегия"],
@@ -383,15 +384,14 @@ nav_pricing:["Pricing","Prețuri","Цены"],
 pr_h:["Packages and prices","Pachete și prețuri","Пакеты и цены"],
 pr_p:["Pick a package, or build an estimate for your own list. Final prices are confirmed after a free consultation.","Alege un pachet sau calculează o estimare pentru lista ta. Prețul final se confirmă după o consultație gratuită.","Выберите пакет или рассчитайте оценку для своего списка. Окончательная цена подтверждается после бесплатной консультации."],
 pr_from:["from","de la","от"],
-pr_custom:["Custom quote","Ofertă personalizată","Индивидуальная оценка"],
 pr_rec:["Recommended","Recomandat","Рекомендуем"],
 pr_select:["Select plan","Alege pachetul","Выбрать пакет"],
-pl1n:["Basic Launch","Lansare de bază","Базовый старт"],
-pl2n:["Pro Business","Business Pro","Бизнес Pro"],
-pl3n:["Custom","Personalizat","Индивидуальный"],
-pl1f:["One-page website|Online booking form|Mobile-friendly design|Hosting and domain setup help","Site de o pagină|Formular de programare online|Design adaptat pentru mobil|Ajutor cu hosting și domeniu","Одностраничный сайт|Форма онлайн-записи|Адаптивный дизайн|Помощь с хостингом и доменом"],
-pl2f:["Up to 5 pages|Booking with email alerts|Up to 3 languages|Basic SEO setup","Până la 5 pagini|Programare cu notificări pe email|Până la 3 limbi|Optimizare SEO de bază","До 5 страниц|Запись с уведомлениями на почту|До 3 языков|Базовая SEO-настройка"],
-pl3f:["Larger or special projects|Online shop or custom features|Plan and price after a consultation","Proiecte mari sau speciale|Magazin online sau funcții personalizate|Plan și preț după consultație","Крупные или особые проекты|Интернет-магазин или особые функции|План и цена после консультации"],
+pl1n:["Starter Launch","Starter Launch","Starter Launch"],
+pl2n:["Pro Business","Pro Business","Pro Business"],
+pl3n:["Enterprise & Chain","Enterprise & Chain","Enterprise & Chain"],
+pl1f:["Modern one-page landing site|Built-in online booking (email alerts via Web3Forms)|Mobile-first design, optimized for phones|Your own domain + free SSL","Site modern tip Landing Page (1 pagină)|Modul de programare online integrat (notificări pe e-mail prin Web3Forms)|Design Mobile-First, optimizat pentru telefoane|Domeniul tău propriu + SSL gratuit","Современный одностраничный сайт|Встроенная онлайн-запись (уведомления на почту через Web3Forms)|Mobile-First дизайн, оптимизирован для телефонов|Ваш домен + бесплатный SSL"],
+pl2f:["Up to 5 pages (Home, Services, Team, Gallery, Contact)|Advanced booking: choose specialist, date and time|Multilingual support (RO / EN / RU)|Basic SEO for Google Search|WhatsApp chat / direct call button","Site de până la 5 pagini (Acasă, Servicii, Echipa, Galerie, Contact)|Sistem avansat de programare (alegerea specialistului + dată/oră)|Suport multilingv (RO / EN / RU)|Optimizare SEO de bază pentru Google Search|WhatsApp Chat / buton de apel direct","До 5 страниц (Главная, Услуги, Команда, Галерея, Контакты)|Расширенная запись: выбор специалиста, даты и времени|Мультиязычность (RO / EN / RU)|Базовая SEO-оптимизация для Google|WhatsApp-чат / кнопка прямого звонка"],
+pl3f:["Unlimited pages + a dedicated page for each team member|Advanced booking with location and complex-service filters|Google Maps, Google Reviews and automatic Instagram feed|Deposit collection / online payments (on request)","Pagini nelimitate + pagină dedicată pentru fiecare membru al echipei|Sistem avansat de programare cu filtrare pe locații și servicii complexe|Integrare Google Maps, Google Reviews și feed Instagram automat|Colectare avans / plăți online (la cerere)","Неограниченное число страниц + отдельная страница для каждого сотрудника|Расширенная запись с фильтрами по филиалам и сложным услугам|Google Maps, Google Reviews и автоматическая лента Instagram|Приём предоплаты / онлайн-платежи (по запросу)"],
 es_h:["Estimate your project","Estimează proiectul tău","Оцените свой проект"],
 es_total:["Estimated price","Preț estimat","Примерная цена"],
 es_time:["Delivery, working days","Livrare, zile lucrătoare","Срок, рабочих дней"],
@@ -429,7 +429,32 @@ f_certs:["Certiport ITS|Java|Networking|Databases","Certiport ITS|Java|Rețelist
 f_p1:["Hi! I'm Anatolie Crîșmaru, a 4th-year student at the Center of Excellence in Informatics and Information Technologies (CEITI) and a software engineer in the making. I hold international Certiport (ITS) certifications in Java, Networking and Databases.","Salut! Sunt Anatolie Crîșmaru, student în anul 4 la Centrul de Excelență în Informatică și Tehnologii Informaționale (CEITI) și inginer software în devenire. Dețin certificări internaționale Certiport (ITS) în Java, Rețelistică și Baze de Date.","Привет! Я Anatolie Crîșmaru, студент 4 курса Центра передового опыта в информатике и информационных технологиях (CEITI) и будущий инженер-программист. У меня есть международные сертификаты Certiport (ITS) по Java, сетям и базам данных."],
 f_p2:["My passion combines rigorous software architecture with an obsessive attention to detail and to user experience. My background in Java application development, Cisco network administration and the service industry (HORECA) gave me a unique perspective: I know how to build complex technical systems, and how to give end customers a simple, fast and pleasant experience.","Pasiunea mea îmbină arhitectura software riguroasă cu atenția obsesivă pentru detaliu și experiența utilizatorului. Background-ul meu în dezvoltarea aplicațiilor Java, administrarea rețelelor Cisco și activitatea din domeniul serviciilor (HORECA) mi-a oferit o perspectivă unică: știu exact cum să construiesc sisteme tehnice complexe, dar și cum să ofer o experiență simplă, rapidă și plăcută clienților finali.","Моя страсть — сочетание строгой архитектуры программного обеспечения с пристальным вниманием к деталям и удобству пользователя. Опыт разработки Java-приложений, администрирования сетей Cisco и работы в сфере услуг (HORECA) дал мне уникальный взгляд: я знаю, как строить сложные технические системы и как дать конечным клиентам простой, быстрый и приятный опыт."],
 f_p3:["I founded eProgram Agency with a clear mission: to help local businesses (beauty salons, barbershops, clinics and studios) get rid of the chaos of phone calls. We build fast web platforms with built-in online booking, turning visitors into loyal clients, 24/7.","Am fondat eProgram Agency cu o misiune clară: să ajut afacerile locale (saloane de înfrumusețare, frizerii, clinici și studiouri) să elimine haosul apelurilor telefonice. Construim platforme web de mare viteză cu sisteme de programare online integrate, transformând simplii vizitatori în clienți fideli, 24/7.","Я основал eProgram Agency с ясной миссией: помочь местному бизнесу (салонам красоты, барбершопам, клиникам и студиям) избавиться от хаоса телефонных звонков. Мы создаём быстрые веб-платформы со встроенной онлайн-записью, превращая посетителей в постоянных клиентов, 24/7."],
-f_alt:["Anatolie Crîșmaru by the sea at sunset","Anatolie Crîșmaru la mare, la apus","Anatolie Crîșmaru у моря на закате"]
+f_alt:["Anatolie Crîșmaru by the sea at sunset","Anatolie Crîșmaru la mare, la apus","Anatolie Crîșmaru у моря на закате"],
+pr_month:["/ month","/ lună","/ мес."],
+pl4n:["Maintenance & Growth","Maintenance & Growth","Maintenance & Growth"],
+pl1w:["For small barbershops, independent specialists and nail artists.","Pentru frizerii mici, specialiști independenți și meșteri manichiură.","Для небольших барбершопов, независимых мастеров и мастеров маникюра."],
+pl2w:["For beauty salons and barber shops with a team of 2–5 specialists.","Pentru saloane de frumusețe și barber shop-uri cu echipă de 2–5 specialiști.","Для салонов красоты и барбершопов с командой из 2–5 специалистов."],
+pl3w:["For large salons, multi-location chains and aesthetic clinics.","Pentru saloane mari, rețele cu mai multe locații și clinici estetice.","Для крупных салонов, сетей с несколькими филиалами и эстетических клиник."],
+pl4w:["For existing clients who want full management.","Pentru clienți existenți care doresc administrare completă.","Для действующих клиентов, которым нужно полное обслуживание."],
+pl4f:["Fast hosting included + domain renewal|Unlimited updates to prices, services, hours or team|Priority technical support on WhatsApp 24/7|Monthly traffic and bookings report","Hosting ultra-rapid inclus + reînnoire domeniu|Actualizări nelimitate de prețuri, servicii, program sau echipă|Suport tehnic prioritar pe WhatsApp 24/7|Raport lunar de trafic și programări","Быстрый хостинг включён + продление домена|Неограниченные обновления цен, услуг, графика и команды|Приоритетная техподдержка в WhatsApp 24/7|Ежемесячный отчёт о трафике и записях"],
+pl1t:["Delivery: ~3–5 days","Livrare: ~3–5 zile","Срок: ~3–5 дней"],
+pl2t:["Delivery: ~7–10 days","Livrare: ~7–10 zile","Срок: ~7–10 дней"],
+pl3t:["Delivery: ~12–15 days","Livrare: ~12–15 zile","Срок: ~12–15 дней"],
+q4:["Can you help me buy a domain (.md / .me / .com) and hosting?","Mă puteți ajuta cu cumpărarea domeniului (.md / .me / .com) și găzduirea?","Поможете ли вы с покупкой домена (.md / .me / .com) и хостингом?"],
+a4:["Yes. We set up your custom domain, hosting on GitHub Pages / Vercel and the SSL security certificate free of charge. The domain registration fee itself is paid to the registrar.","Da, ne ocupăm gratuit de configurarea domeniului tău custom, a găzduirii pe GitHub Pages / Vercel și a certificatului SSL de securitate. Taxa de înregistrare a domeniului se plătește registratorului.","Да, мы бесплатно настроим ваш домен, хостинг на GitHub Pages / Vercel и SSL-сертификат безопасности. Саму регистрацию домена вы оплачиваете регистратору."],
+q5:["What if I want to change prices or services later?","Ce se întâmplă dacă vreau să schimb prețurile sau serviciile ulterior?","Что, если я захочу позже изменить цены или услуги?"],
+a5:["If you choose the maintenance plan, we make any change within 24 hours. The code is also clean and easy to edit.","Dacă optezi pentru pachetul de mentenanță, facem noi orice modificare în maxim 24 de ore. De asemenea, codul este curat și ușor de modificat.","Если вы выберете пакет обслуживания, мы внесём любые изменения не позднее чем за 24 часа. Код также чистый и легко редактируется."],
+q6:["Will the site work well on mobile?","Site-ul va funcționa bine de pe mobil?","Будет ли сайт хорошо работать на телефоне?"],
+a6:["Yes. Most salon clients come from a phone, so we build interfaces for smartphone screens first.","Da. Majoritatea clientelei saloanelor vine de pe telefon, de aceea construim interfețele în primul rând pentru ecranul smartphone-urilor.","Да. Большинство клиентов салонов приходит с телефона, поэтому мы сначала проектируем интерфейс под экран смартфона."],
+q7:["What materials do I need to give you to start?","Ce materiale trebuie să vă ofer pentru a începe?","Какие материалы нужно вам передать, чтобы начать?"],
+a7:["We need your list of services with prices, your team's names, opening hours, your logo (if you have one) and your business contact details.","Avem nevoie de lista de servicii cu prețuri, numele echipei, programul de lucru, logo-ul (dacă există) și datele de contact ale afacerii.","Нам нужны список услуг с ценами, имена команды, график работы, логотип (если он есть) и контактные данные бизнеса."],
+q8:["How does a site like this help reduce missed calls?","Cum ajută un astfel de site la reducerea apelurilor pierdute?","Как такой сайт помогает сократить пропущенные звонки?"],
+a8:["Clients can book on their own 24/7, even at night or while you are busy with another client, so you no longer have to answer the phone.","Clienții se pot programa singuri 24/7, chiar și în timpul nopții sau când ești ocupat cu un alt client, fără să mai fii nevoit să răspunzi la telefon.","Клиенты записываются сами круглосуточно, даже ночью или пока вы заняты с другим клиентом, и вам не нужно отвечать на звонки."],
+q9:["Do you offer a guarantee or support after launch?","Oferiți garanție sau suport după lansare?","Даёте ли вы гарантию или поддержку после запуска?"],
+a9:["Yes, we offer 30 days of free technical support after launch to make sure everything works flawlessly.","Da, oferim 30 de zile de suport tehnic gratuit după lansare pentru a ne asigura că totul funcționează impecabil.","Да, мы предоставляем 30 дней бесплатной технической поддержки после запуска, чтобы всё работало безупречно."],
+q10:["How do we start working together?","Cum începem colaborarea?","Как начать сотрудничество?"],
+a10:["Fill in the booking form on this page{wa} for a free 15-minute consultation.","Completează formularul de programare de pe site{wa} pentru o consultație gratuită de 15 minute.","Заполните форму записи на сайте{wa}, чтобы получить бесплатную 15-минутную консультацию."],
+a10w:[" or message us directly on WhatsApp"," sau scrie-ne direct pe WhatsApp"," или напишите нам напрямую в WhatsApp"]
 };
 
 /* ===== APP ===== */
@@ -507,9 +532,10 @@ function drawPricing(){
   CONFIG.plans.forEach(p => {
     const c = document.createElement("div"); c.className = "glass card plan" + (p.featured ? " feat" : "");
     c.innerHTML = `${p.featured ? `<span class="badge">${t("pr_rec")}</span>` : ""}<h3>${t("pl"+p.id+"n")}</h3>
-      <div class="price">${p.price ? `<small>${t("pr_from")}</small> ${money(p.price)}` : t("pr_custom")}</div>
-      <ul>${t("pl"+p.id+"f").split("|").map(f => `<li>${f}</li>`).join("")}</ul>`;
-    c.appendChild(btn("btn" + (p.featured ? "" : " ghost"), t("pr_select"), null, () => prefill("Plan: " + I18N["pl"+p.id+"n"][0] + (p.price ? ` (from ${p.price} ${CONFIG.currency})` : ""))));
+      <div class="for">${t("pl"+p.id+"w")}</div>
+      <div class="price">${p.monthly ? `${money(p.price)} <small>${t("pr_month")}</small>` : `<small>${t("pr_from")}</small> ${money(p.price)}`}</div>
+      <ul>${t("pl"+p.id+"f").split("|").map(f => `<li>${f}</li>`).join("")}</ul>${I18N["pl"+p.id+"t"] ? `<div class="eta">${t("pl"+p.id+"t")}</div>` : ""}`;
+    c.appendChild(btn("btn" + (p.featured ? "" : " ghost"), t("pr_select"), null, () => prefill("Plan: " + I18N["pl"+p.id+"n"][0] + (p.monthly ? ` (${p.price} ${CONFIG.currency} / month)` : ` (from ${p.price} ${CONFIG.currency})`))));
     pl.appendChild(c);
   });
   const op = $("opts"); op.innerHTML = "";
@@ -520,6 +546,15 @@ function drawPricing(){
     op.appendChild(l);
   });
   drawTotal();
+}
+function drawFaq(){
+  const box = $("faq-list"); box.innerHTML = "";
+  for(let i = 1; i <= 10; i++){
+    const d = document.createElement("details"); d.className = "glass";
+    const q = document.createElement("summary"); q.textContent = t("q"+i);
+    const a = document.createElement("p"); a.textContent = t("a"+i).replace("{wa}", CONFIG.whatsapp ? t("a10w") : "");
+    d.append(q, a); box.appendChild(d);
+  }
 }
 function drawWa(){
   const a = $("wa"); if(!CONFIG.whatsapp) return;
@@ -539,6 +574,7 @@ function drawExtras(){
   $("bn-c").textContent = t("bn_cta");
   $("bn-x").setAttribute("aria-label", t("close"));
   $("f-img").alt = t("f_alt");
+  [["p1-img","Fade & Blade","ty1"],["p2-img","Lumina Studio","ty2"],["p3-img","Nail Atelier","ty3"]].forEach(([i,n,k]) => $(i).alt = n + " – " + t(k));
   $("f-tags").innerHTML = t("f_certs").split("|").map(x => `<span>${x}</span>`).join("");
 }
 $("bn-x").onclick = () => $("bn").hidden = true;
@@ -569,7 +605,7 @@ function applyLang(){
   document.querySelectorAll("[data-ph]").forEach(e => e.placeholder = t(e.dataset.ph));
   document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === LANGS[L]));
   $("theme").setAttribute("aria-label", t("theme"));
-  drawServices(); drawExperts(); drawCal(); drawTimes(); update(); drawPricing(); drawWa(); drawExtras();
+  drawServices(); drawExperts(); drawCal(); drawTimes(); update(); drawPricing(); drawFaq(); drawWa(); drawExtras();
 }
 document.querySelectorAll("[data-lang]").forEach(b => b.onclick = () => { L = LANGS.indexOf(b.dataset.lang); store.set("lang", b.dataset.lang); applyLang(); });
 
