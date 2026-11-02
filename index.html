@@ -6,7 +6,7 @@
 <title>eProgram Agency | Booking Websites for Barbershops &amp; Salons</title>
 <meta name="description" content="We build fast, modern websites with online appointment booking for barbershops, beauty salons and other service businesses. Book a free consultation.">
 <meta name="theme-color" content="#0b0a1a">
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=2">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="canonical" href="https://eprogramagency.me/">
 <meta property="og:type" content="website">
@@ -159,7 +159,9 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 .tg{flex:none;width:44px;height:44px;border-radius:12px;background:var(--grad);display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff;box-shadow:0 0 16px rgba(124,58,237,.5)}
 .tc b{display:block;margin-bottom:2px}.tc p{font-size:13px;color:var(--muted)}
 .founder{display:grid;grid-template-columns:280px 1fr;gap:24px;align-items:start}
-.fcard{padding:26px;text-align:center}
+.fcard{padding:18px;text-align:center;border-color:rgba(124,92,255,.65);box-shadow:0 0 36px rgba(124,58,237,.4),0 0 70px rgba(59,130,246,.22)}
+.fcard .tags span{box-shadow:0 0 12px rgba(34,229,201,.35)}
+.fname{font-size:22px;margin-bottom:2px}.fbio small{display:block;color:var(--muted);margin-bottom:16px}
 .fav{width:96px;height:96px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-size:34px;font-weight:700;color:#fff;margin:0 auto 14px;box-shadow:0 0 28px rgba(124,58,237,.5)}
 .fphoto{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:center 40%;border-radius:14px;margin-bottom:16px;box-shadow:0 0 28px rgba(124,58,237,.35)}
 .fcard h3{font-size:18px}.fcard small{color:var(--muted);display:block;margin-bottom:14px}.fcard .tags{justify-content:center}
@@ -264,8 +266,8 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
   </div></section>
 
   <section id="founder"><div class="wrap"><div class="founder">
-    <div class="glass fcard"><img class="fphoto" id="f-img" src="anatolImage.jpg" width="720" height="960" alt="" loading="lazy"><h3>Anatolie Crîșmaru</h3><small data-i18n="f_role"></small><div class="tags" id="f-tags"></div></div>
-    <div class="glass fbio"><h2 data-i18n="f_h" style="font-size:26px;margin-bottom:16px"></h2><p data-i18n="f_p1"></p><p data-i18n="f_p2"></p><p data-i18n="f_p3"></p></div>
+    <div class="glass fcard"><img class="fphoto" id="f-img" src="anatolImage.jpg" width="720" height="960" alt="" loading="lazy"><div class="tags" id="f-tags"></div></div>
+    <div class="glass fbio"><h2 data-i18n="f_h" style="font-size:26px;margin-bottom:16px"></h2><h3 class="fname">Anatolie Crîșmaru</h3><small data-i18n="f_role"></small><p data-i18n="f_p1"></p><p data-i18n="f_p2"></p></div>
   </div></div></section>
 
   <section id="faq"><div class="wrap faq">
@@ -305,7 +307,7 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 
 <div class="modal" id="exit" role="dialog" aria-modal="true" aria-labelledby="ex-title">
   <div class="glass"><div class="tick">👋</div><h2 id="ex-title" style="font-size:22px" data-i18n="ex_t"></h2><p id="ex-p" data-i18n="ex_p"></p>
-    <div id="ex-form"><div class="xin"><input id="ex-email" type="email" autocomplete="email" placeholder="you@example.com" aria-label="Email"><button class="btn" id="ex-send" type="button" data-i18n="ex_btn"></button></div>
+    <div id="ex-form"><div class="xin"><input id="ex-phone" type="tel" autocomplete="tel" placeholder="WhatsApp: +373 ..." aria-label="WhatsApp"><button class="btn" id="ex-send" type="button" data-i18n="ex_btn"></button></div>
     <div class="err" id="ex-err" role="alert"></div><button class="btn ghost" id="ex-no" type="button" data-i18n="ex_no"></button></div>
   </div>
 </div>
@@ -328,8 +330,8 @@ const CONFIG = {
   closedWeekdays: [0], // 0 = Sunday. Use [] to open every day.
   // WhatsApp button: your number with country code, digits only (e.g. "373XXXXXXXX"). Leave empty to hide the button.
   whatsapp: "",
-  // Top banner: leave null for the general message. Set a number (e.g. 2) ONLY if it is true: "Only 2 spots left this month".
-  bannerSlots: null,
+  // Top banner: "Only N spots left this month". Keep this number true and update it monthly. Set null to show a general message instead.
+  bannerSlots: 2,
   // PRICES: package prices come from your list. The estimator prices below are aligned to them (landing + booking = Starter). Adjust if needed.
   currency: "EUR",
   plans: [{id:1, price:250}, {id:2, price:500, featured:true}, {id:3, price:850}, {id:4, price:50, monthly:true}],
@@ -411,10 +413,10 @@ bn_slots:["Only {n} spots left for projects this month.","Doar {n} locuri dispon
 bn_cta:["Book a free consultation","Programează o consultație gratuită","Запишитесь на бесплатную консультацию"],
 close:["Close","Închide","Закрыть"],
 ex_t:["Wait! Want a quick demo for your business?","Așteaptă! Vrei o demonstrație rapidă pentru afacerea ta?","Подождите! Хотите быстрое демо для вашего бизнеса?"],
-ex_p:["Leave your email and we'll show you what your booking site could look like.","Lasă-ne emailul tău și îți arătăm cum ar putea arăta site-ul tău cu programări.","Оставьте почту, и мы покажем, как мог бы выглядеть ваш сайт с записью."],
+ex_p:["Leave your WhatsApp number and we'll send you a quick demo for your business.","Lasă-ne numărul tău de WhatsApp și îți trimitem o demonstrație rapidă pentru afacerea ta.","Оставьте номер WhatsApp, и мы пришлём быстрое демо для вашего бизнеса."],
 ex_btn:["Send me a demo","Trimite-mi o demonstrație","Пришлите мне демо"],
 ex_no:["No thanks","Nu, mulțumesc","Нет, спасибо"],
-ex_ok:["Thanks! We'll write to you soon.","Mulțumim! Îți scriem în curând.","Спасибо! Скоро напишем вам."],
+ex_ok:["Thanks! We'll message you on WhatsApp soon.","Mulțumim! Îți scriem în curând pe WhatsApp.","Спасибо! Скоро напишем вам в WhatsApp."],
 tc_h:["Tools we build with","Uneltele cu care construim","Инструменты, с которыми мы работаем"],
 tc_p:["A modern, simple set of tools that keeps your site fast and cheap to run.","Un set modern și simplu de unelte, care îți menține site-ul rapid și ieftin de întreținut.","Современный и простой набор инструментов: сайт быстрый и недорогой в содержании."],
 tc1d:["Clean, fast pages that work on every device.","Pagini curate și rapide, care funcționează pe orice dispozitiv.","Чистые и быстрые страницы для любых устройств."],
@@ -425,10 +427,9 @@ tc5d:["Free, fast and reliable hosting.","Hosting gratuit, rapid și fiabil.","�
 tc6d:["Back-end and databases for bigger projects.","Back-end și baze de date pentru proiecte mari.","Серверная часть и базы данных для крупных проектов."],
 f_h:["Meet the founder","Fondatorul","Основатель"],
 f_role:["Founder & Lead Developer","Fondator & Lead Developer","Основатель и ведущий разработчик"],
-f_certs:["Certiport ITS|Java|Networking|Databases","Certiport ITS|Java|Rețelistică|Baze de date","Certiport ITS|Java|Сети|Базы данных"],
-f_p1:["Hi! I'm Anatolie Crîșmaru, a 4th-year student at the Center of Excellence in Informatics and Information Technologies (CEITI) and a software engineer in the making. I hold international Certiport (ITS) certifications in Java, Networking and Databases.","Salut! Sunt Anatolie Crîșmaru, student în anul 4 la Centrul de Excelență în Informatică și Tehnologii Informaționale (CEITI) și inginer software în devenire. Dețin certificări internaționale Certiport (ITS) în Java, Rețelistică și Baze de Date.","Привет! Я Anatolie Crîșmaru, студент 4 курса Центра передового опыта в информатике и информационных технологиях (CEITI) и будущий инженер-программист. У меня есть международные сертификаты Certiport (ITS) по Java, сетям и базам данных."],
-f_p2:["My passion combines rigorous software architecture with an obsessive attention to detail and to user experience. My background in Java application development, Cisco network administration and the service industry (HORECA) gave me a unique perspective: I know how to build complex technical systems, and how to give end customers a simple, fast and pleasant experience.","Pasiunea mea îmbină arhitectura software riguroasă cu atenția obsesivă pentru detaliu și experiența utilizatorului. Background-ul meu în dezvoltarea aplicațiilor Java, administrarea rețelelor Cisco și activitatea din domeniul serviciilor (HORECA) mi-a oferit o perspectivă unică: știu exact cum să construiesc sisteme tehnice complexe, dar și cum să ofer o experiență simplă, rapidă și plăcută clienților finali.","Моя страсть — сочетание строгой архитектуры программного обеспечения с пристальным вниманием к деталям и удобству пользователя. Опыт разработки Java-приложений, администрирования сетей Cisco и работы в сфере услуг (HORECA) дал мне уникальный взгляд: я знаю, как строить сложные технические системы и как дать конечным клиентам простой, быстрый и приятный опыт."],
-f_p3:["I founded eProgram Agency with a clear mission: to help local businesses (beauty salons, barbershops, clinics and studios) get rid of the chaos of phone calls. We build fast web platforms with built-in online booking, turning visitors into loyal clients, 24/7.","Am fondat eProgram Agency cu o misiune clară: să ajut afacerile locale (saloane de înfrumusețare, frizerii, clinici și studiouri) să elimine haosul apelurilor telefonice. Construim platforme web de mare viteză cu sisteme de programare online integrate, transformând simplii vizitatori în clienți fideli, 24/7.","Я основал eProgram Agency с ясной миссией: помочь местному бизнесу (салонам красоты, барбершопам, клиникам и студиям) избавиться от хаоса телефонных звонков. Мы создаём быстрые веб-платформы со встроенной онлайн-записью, превращая посетителей в постоянных клиентов, 24/7."],
+f_certs:["ITS Java Certified|ITS Networking|ITS Databases","ITS Java Certified|ITS Networking|ITS Databases","ITS Java Certified|ITS Networking|ITS Databases"],
+f_p1:["Hi! I'm Anatolie Crîșmaru, a 4th-year student at CEITI and the founder of eProgram Agency. I hold international Certiport (ITS) certifications in Java, Networking and Databases. My background in software development, Cisco networks and the service industry lets me build fast, secure web platforms designed to turn visitors into loyal clients.","Salut! Sunt Anatolie Crîșmaru, student în anul 4 la CEITI și fondator eProgram Agency. Dețin certificări internaționale Certiport (ITS) în Java, Rețelistică și Baze de Date. Background-ul meu în dezvoltarea software, rețele Cisco și domeniul serviciilor îmi permite să construiesc platforme web rapide, sigure și concepute pentru a converti vizitatorii în clienți fideli.","Привет! Я Anatolie Crîșmaru, студент 4 курса CEITI и основатель eProgram Agency. У меня есть международные сертификаты Certiport (ITS) по Java, сетям и базам данных. Опыт в разработке ПО, сетях Cisco и сфере услуг позволяет мне создавать быстрые и безопасные веб-платформы, которые превращают посетителей в постоянных клиентов."],
+f_p2:["I founded eProgram Agency with a clear mission: to help local businesses (beauty salons, barbershops, clinics and studios) get rid of the chaos of phone calls. We build fast web platforms with built-in online booking, turning visitors into loyal clients, 24/7.","Am fondat eProgram Agency cu o misiune clară: să ajut afacerile locale (saloane de înfrumusețare, frizerii, clinici și studiouri) să elimine haosul apelurilor telefonice. Construim platforme web de mare viteză cu sisteme de programare online integrate, transformând simplii vizitatori în clienți fideli, 24/7.","Я основал eProgram Agency с ясной миссией: помочь местному бизнесу (салонам красоты, барбершопам, клиникам и студиям) избавиться от хаоса телефонных звонков. Мы создаём быстрые веб-платформы со встроенной онлайн-записью, превращая посетителей в постоянных клиентов, 24/7."],
 f_alt:["Anatolie Crîșmaru by the sea at sunset","Anatolie Crîșmaru la mare, la apus","Anatolie Crîșmaru у моря на закате"],
 pr_month:["/ month","/ lună","/ мес."],
 pl4n:["Maintenance & Growth","Maintenance & Growth","Maintenance & Growth"],
@@ -585,16 +586,16 @@ function closeExit(){ $("exit").classList.remove("open"); }
 document.addEventListener("mouseout", e => {
   if(e.relatedTarget || e.clientY > 0 || ss.get("exit") || Date.now() - t0 < 8000) return;
   if(!matchMedia("(pointer:fine)").matches || document.querySelector(".modal.open") || $("name").value || $("email").value) return;
-  ss.set("exit", "1"); $("exit").classList.add("open"); $("ex-email").focus();
+  ss.set("exit", "1"); $("exit").classList.add("open"); $("ex-phone").focus();
 });
 $("ex-no").onclick = closeExit;
 $("exit").addEventListener("click", e => { if(e.target === $("exit")) closeExit(); });
 $("ex-send").onclick = async () => {
-  const v = $("ex-email").value.trim(), err = $("ex-err"); err.textContent = "";
-  if(!/^\S+@\S+\.\S+$/.test(v)) return err.textContent = t("e_email");
+  const v = $("ex-phone").value.trim(), err = $("ex-err"); err.textContent = "";
+  if(v.replace(/\D/g,"").length < 8) return err.textContent = t("e_phone");
   $("ex-send").disabled = true;
   try{
-    if(!await sendLead({ email:v, message:"Visitor asked for a quick demo (exit popup)", language:LANGS[L] }, "Demo request")) throw 0;
+    if(!await sendLead({ whatsapp:v, message:"Visitor left a WhatsApp number for a quick demo (exit popup)", language:LANGS[L] }, "Demo request")) throw 0;
     $("ex-p").textContent = t("ex_ok"); $("ex-form").hidden = true; setTimeout(closeExit, 2500);
   }catch(e){ $("ex-send").disabled = false; err.textContent = t("e_send"); }
 };
