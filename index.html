@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add("js")</script>
+<!-- build: reveal-animations v2 -->
 <title>eProgram Agency | Booking Websites for Barbershops &amp; Salons</title>
 <meta name="description" content="We build fast, modern websites with online appointment booking for barbershops, beauty salons and other service businesses. Book a free consultation.">
 <meta name="theme-color" content="#0b0a1a">
@@ -168,13 +169,14 @@ footer{padding:40px 0 50px;color:var(--muted);font-size:13px;text-align:center;b
 .fcard h3{font-size:18px}.fcard small{color:var(--muted);display:block;margin-bottom:14px}.fcard .tags{justify-content:center}
 .fbio{padding:26px}.fbio p{color:var(--muted);margin-bottom:14px;max-width:70ch}.fbio p:last-child{margin-bottom:0}
 .xin{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.xin input{flex:1;min-width:180px}
-.js .rv{opacity:0}
-.rv.in{animation:rvIn .8s cubic-bezier(.2,.7,.2,1) var(--d,0s) both}
-.rv.l{--tx:-44px;--ty:0px}.rv.r{--tx:44px;--ty:0px}
-@keyframes rvIn{from{opacity:0;translate:var(--tx,0px) var(--ty,28px)}to{opacity:1;translate:0 0}}
+/* Scroll reveal: .reveal = hidden and shifted down, .active = visible (added by JS when it enters the screen) */
+.js .reveal{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+.js .reveal.from-left{transform:translateX(-48px)}
+.js .reveal.from-right{transform:translateX(48px)}
+.js .reveal.active{opacity:1;transform:none}
 @media(max-width:900px){.links a:not(.btn){display:none}.steps{grid-template-columns:1fr 1fr}.founder{grid-template-columns:1fr}.tech,.plans{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){.grid3,.booking,.form,.experts,.steps{grid-template-columns:1fr}.links .btn{display:none}.hero{padding-top:50px}.logo span{display:none}.opts,.tech,.plans{grid-template-columns:1fr}.total .btn{margin-left:0}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.js .rv{opacity:1}.rv.in{animation:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.js .reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -606,9 +608,20 @@ $("ex-send").onclick = async () => {
 };
 
 let rvFirst = true;
-const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold:.12, rootMargin:"0px 0px -6% 0px" }) : null;
-function rvAdd(el, variant, delay){ if(!rvFirst) return; el.classList.add("rv"); if(variant) el.classList.add(variant); el.style.setProperty("--d", delay + "s"); }
-function rvObserve(){ document.querySelectorAll(".rv:not(.in)").forEach(el => io ? io.observe(el) : el.classList.add("in")); }
+function rvShow(el){
+  el.classList.add("active");
+  /* animate once, then drop the helper classes so hover effects and normal styles work again */
+  const ms = 1200 + (parseFloat(el.style.getPropertyValue("--d")) || 0) * 1000;
+  setTimeout(() => { el.classList.remove("reveal", "active", "from-left", "from-right"); el.style.removeProperty("--d"); }, ms);
+}
+function rvSkip(el){ el.classList.remove("reveal", "active", "from-left", "from-right"); el.style.removeProperty("--d"); }
+/* entering the screen -> animate; already scrolled past (fast scroll or anchor jump) -> just show it, never leave a blank gap */
+const io = "IntersectionObserver" in window ? new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){ io.unobserve(e.target); rvShow(e.target); }
+  else if(e.boundingClientRect.top < 0){ io.unobserve(e.target); rvSkip(e.target); }
+}), { threshold:.1, rootMargin:"0px 0px -5% 0px" }) : null;
+function rvAdd(el, variant, delay){ if(!rvFirst) return; el.classList.add("reveal"); if(variant) el.classList.add(variant === "l" ? "from-left" : "from-right"); el.style.setProperty("--d", delay + "s"); }
+function rvObserve(){ document.querySelectorAll(".reveal:not(.active)").forEach(el => io ? io.observe(el) : rvShow(el)); }
 /* [selector, direction ("" = from below, "l" / "r" = from the side), stagger step in seconds] */
 [["#top .hero h1, #top .hero p, #top .hero .row","",.14],
  ["#services h2","",0],["#services .card","",.12],
